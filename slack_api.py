@@ -33,21 +33,26 @@ def sendSlackMsg(receiverEmail, payload):
     payload = payload
     users = getSlackUsers()
     for user in users['members']:
-        print '*****\n' + json.dumps(user)
+#        print '*****\n' + json.dumps(user)
         try:
+#            print 'wants to be: ' + receiverEmail
+#            print user['profile']['email']
             if user['profile']['email'] == receiverEmail:
+#                print '*****\nPosted the above\n*****'
                 payload['channel'] = user['id']
         except:
             pass
+    print payload
     r = requests.post('https://slack.com/api/chat.postMessage',\
                        params=payload)
+    print r.status_code
 
 if __name__ == '__main__':
     config = getConfig()
     payload = {
     'token': config['key'],
-    'text': 'Hi Slack APIBot',
+    'text': 'oh you crazy Slack APIBot',
     'username': 'BotBot'
     }
    
-    sendSlackMsg(config['user'], payload)
+    sendSlackMsg(config['email'], payload)
