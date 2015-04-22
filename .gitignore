@@ -3,3 +3,5 @@
 *.pyc
 *.json
 __init__.py
+.gitignore
+requests/
